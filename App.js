@@ -5,39 +5,23 @@
  * @format
  */
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {
   SafeAreaView,
   ScrollView,
   StatusBar,
-  Text,
   useColorScheme,
+  Text,
 } from 'react-native';
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import SplashScreen from 'react-native-splash-screen';
 import OnboardingScreen from './src/components/onboarding';
-import {_getFromStorage, _saveToStorage} from './src/libs/storage/system';
+import Context from './src/libs/stateManagement/context';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
-  const [isBoard, setIsBoard] = useState(false);
-
-  useEffect(() => {
-    _getState();
-    SplashScreen.hide();
-  }, []);
-
-  const _getState = async () => {
-    let res = await _getFromStorage('isBoard');
-
-    if (res) setIsBoard(res);
-  };
-
-  const _changeState = () => {
-    if (_saveToStorage({mykey: 'isBoard', value: true}))
-      return setIsBoard(true);
-  };
+  const context = useContext(Context);
+  const {isBoard} = context;
 
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
@@ -58,7 +42,7 @@ function App() {
       </SafeAreaView>
     );
 
-  return <OnboardingScreen skipDone={_changeState} />;
+  return <OnboardingScreen skipDone={context._changeState} />;
 }
 
 export default App;
