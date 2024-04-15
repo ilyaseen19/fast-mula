@@ -13,18 +13,20 @@ import colors from '../../../../components/colors';
 export default function AppState(props) {
   const navigation = useNavigation();
 
-  const [user, setUser] = useState(null);
-
-  const [system, setSystem] = useState({
-    interestRate: {low: 26, high: 28},
-    loading: false,
-    contact: '',
+  const [user, setUser] = useState({
+    loan: {
+      loanStatus: "Not applied",
+      isApplied: false,
+    }
   });
+  const [loading, setLoading] = useState(false);
 
   return (
     <Context.Provider
       value={{
         colors,
+        loading,
+        user
       }}>
       {props.children}
     </Context.Provider>

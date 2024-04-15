@@ -5,5 +5,6 @@ export default React.createContext({
   user: Object,
   isBoard: Boolean,
   selectedContact: String,
+  loading: Boolean,
   _changeState: () => {},
 });

@@ -5,18 +5,16 @@
  * @format
  */
 
-import React, {useEffect, useState, useContext} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  useColorScheme,
-  Text,
-} from 'react-native';
-
+import React, {useContext} from 'react';
+import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import OnboardingScreen from './src/components/onboarding';
 import Context from './src/libs/stateManagement/context';
+import Main from './src/main';
+import {_getFromStorage} from './src/libs/storage/system';
+import AppState from './src/libs/stateManagement/states/appState';
+import colors from './src/components/colors';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,21 +22,27 @@ function App() {
   const {isBoard} = context;
 
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    display: 'flex',
+    flex: 1,
+    backgroundColor: isDarkMode ? Colors.darker : colors.primaryColor,
   };
 
   if (isBoard)
     return (
       <SafeAreaView style={backgroundStyle}>
-        <StatusBar
-          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-          backgroundColor={backgroundStyle.backgroundColor}
-        />
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={backgroundStyle}>
-          <Text>App</Text>
-        </ScrollView>
+        <NavigationContainer>
+          <StatusBar
+            barStyle={'light-content'}
+            backgroundColor={backgroundStyle.backgroundColor}
+          />
+          {/* <ScrollView
+            contentInsetAdjustmentBehavior="automatic"
+            style={backgroundStyle}> */}
+          <AppState>
+            <Main />
+          </AppState>
+          {/* </ScrollView> */}
+        </NavigationContainer>
       </SafeAreaView>
     );
 

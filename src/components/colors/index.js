@@ -1,5 +1,5 @@
 const colors = {
-  primaryColor: '#BA68C8',
+  primaryColor: '#7E57C2',
   secondaryColor: '#fff',
   myGrey: 'rgba(204, 204, 204, 0.6)',
   danger: '#FB0101',

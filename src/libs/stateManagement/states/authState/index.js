@@ -14,7 +14,7 @@ export default function AuthState(props) {
   // const navigation = useNavigation();
 
   const [user, setUser] = useState(null);
-  const [isBoard, setIsBoard] = useState(false);
+  const [isBoard, setIsBoard] = useState(_getFromStorage('isBoard'));
 
   const _changeState = () => {
     if (_saveToStorage({mykey: 'isBoard', value: true}))
@@ -37,7 +37,8 @@ export default function AuthState(props) {
       value={{
         colors,
         isBoard,
-        _changeState
+        user,
+        _changeState,
       }}>
       {props.children}
     </Context.Provider>
