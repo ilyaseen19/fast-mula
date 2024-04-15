@@ -15,18 +15,23 @@ export default function AppState(props) {
 
   const [user, setUser] = useState({
     loan: {
-      loanStatus: "Not applied",
+      loanStatus: 'Not applied',
       isApplied: false,
-    }
+    },
   });
   const [loading, setLoading] = useState(false);
+
+  const routeWithProps = data => {
+    navigation.navigate(data.path, {title: data.title});
+  };
 
   return (
     <Context.Provider
       value={{
         colors,
         loading,
-        user
+        user,
+        routeWithProps,
       }}>
       {props.children}
     </Context.Provider>

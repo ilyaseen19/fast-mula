@@ -6,6 +6,7 @@ import HomePage from './screens/home';
 import Records from './screens/records';
 import Account from './screens/account';
 import Context from '../libs/stateManagement/context';
+import Intro from './screens/home/introductory';
 // import Auth from './screens/auth';
 // import GetLoan from './screens/getLoan';
 // import PaymentMethod from './screens/paymentMethods';
@@ -76,19 +77,20 @@ export default function Main() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Main" component={HomeScreen} />
+      <Stack.Screen name="Intro" component={Intro} />
       {/* <Stack.Screen name="Auth" component={Auth} />
-        <Stack.Screen name="Loan" component={GetLoan} />
-        <Stack.Screen name="Payment_method" component={PaymentMethod} />
-        <Stack.Screen name="Add_payment_method" component={AddPaymentMethod} />
-        <Stack.Screen name="Verify_pic" component={VerifyPic} />
-        <Stack.Screen name="Loan_details" component={LoanDetails} />
-        <Stack.Screen name="About_us" component={AboutUs} />
-        <Stack.Screen name="Privacy" component={PrivacyPolicy} />
-        <Stack.Screen name="Profile" component={UserProfile} />
-        <Stack.Screen name="Notifications" component={UserNotifi} />
-        <Stack.Screen name="partial_payment" component={PatialPay} />
-        <Stack.Screen name="full_payment" component={FullPay} />
-        <Stack.Screen name="apply_extension" component={ApplyExtension} /> */}
+      <Stack.Screen name="Loan" component={GetLoan} />
+      <Stack.Screen name="Payment_method" component={PaymentMethod} />
+      <Stack.Screen name="Add_payment_method" component={AddPaymentMethod} />
+      <Stack.Screen name="Verify_pic" component={VerifyPic} />
+      <Stack.Screen name="Loan_details" component={LoanDetails} />
+      <Stack.Screen name="About_us" component={AboutUs} />
+      <Stack.Screen name="Privacy" component={PrivacyPolicy} />
+      <Stack.Screen name="Profile" component={UserProfile} />
+      <Stack.Screen name="Notifications" component={UserNotifi} />
+      <Stack.Screen name="partial_payment" component={PatialPay} />
+      <Stack.Screen name="full_payment" component={FullPay} />
+      <Stack.Screen name="apply_extension" component={ApplyExtension} /> */}
     </Stack.Navigator>
   );
 }

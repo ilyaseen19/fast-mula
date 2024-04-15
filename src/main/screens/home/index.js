@@ -40,13 +40,13 @@ export default function HomePage() {
             }}>
             <VStack>
               <HStack justifyContent="space-around">
-                <ButtonCard>
+                <ButtonCard press={()=> context.routeWithProps({path: "Intro", title: "iou"})}>
                   <Text fontSize={20} fontWeight={'bold'} color={primaryColor}>
                     IOU
                   </Text>
                   <Icon name="cash-outline" color={primaryColor} size={70} />
                 </ButtonCard>
-                <ButtonCard>
+                <ButtonCard press={()=> context.routeWithProps({path: "Intro", title: "agri"})}>
                   <Text fontSize={20} fontWeight={'bold'} color={primaryColor}>
                     AGRI
                   </Text>
@@ -54,7 +54,7 @@ export default function HomePage() {
                 </ButtonCard>
               </HStack>
               <HStack mt={10} justifyContent={'center'}>
-                <ButtonCard>
+                <ButtonCard press={()=> context.routeWithProps({path: "Intro", title: "farm"})}>
                   <Text fontSize={20} fontWeight={'bold'} color={primaryColor}>FARM</Text>
                   <Image alignSelf="center" size={70} alt='review' source={require("../../../components/images/farm.png")} />
                 </ButtonCard>

@@ -7,4 +7,5 @@ export default React.createContext({
   selectedContact: String,
   loading: Boolean,
   _changeState: () => {},
+  routeWithProps: () => {},
 });
