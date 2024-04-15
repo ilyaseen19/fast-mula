@@ -54,8 +54,8 @@ export default function HomePage() {
                 </ButtonCard>
               </HStack>
               <HStack mt={10} justifyContent={'center'}>
-                <ButtonCard press={()=> context.routeWithProps({path: "Intro", title: "farm"})}>
-                  <Text fontSize={20} fontWeight={'bold'} color={primaryColor}>FARM</Text>
+                <ButtonCard press={()=> context.routeWithProps({path: "Intro", title: "livestock"})}>
+                  <Text fontSize={20} fontWeight={'bold'} color={primaryColor}>LIVE STOCK</Text>
                   <Image alignSelf="center" size={70} alt='review' source={require("../../../components/images/farm.png")} />
                 </ButtonCard>
               </HStack>

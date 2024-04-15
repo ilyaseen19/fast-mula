@@ -38,11 +38,45 @@ export default function Intro({route}) {
   }
 
   if (title === 'agri') {
-    return <Text>{title}</Text>;
+ return(<View style={container}>
+        <Text fontSize={20} fontWeight="bold">{title}</Text>
+        <VStack
+          overflow="hidden"
+          h="95%"
+          w="100%"
+          borderTopRadius={50}
+          mt="auto"
+          pt={15}
+          px={15}
+          justifyContent="center"
+          alignItems="center"
+          bg={colors.secondaryColor}>
+          <Image alignSelf="center" size={400} alt='review' source={require("../../../components/images/agri_intro.png")} />
+          <Text color={primaryColor} fontWeight="bold" fontSize={15} textAlign="center">Here you can request and borrow Agriculture material to boost your farm produce and pay back later</Text>
+            <Text shadow={5} fontSize={20} fontWeight="bold" color={primaryColor}>Coming Soon</Text>
+        </VStack>
+    </View>)
   }
 
-  if (title === 'farm') {
-    return <Text>{title}</Text>;
+  if (title === 'livestock') {
+    return (<View style={container}>
+        <Text fontSize={20} fontWeight="bold">{title}</Text>
+        <VStack
+          overflow="hidden"
+          h="95%"
+          w="100%"
+          borderTopRadius={50}
+          mt="auto"
+          pt={15}
+          px={15}
+          justifyContent="center"
+          alignItems="center"
+          bg={colors.secondaryColor}>
+          <Image alignSelf="center" size={400} alt='review' source={require("../../../components/images/livestock.png")} />
+          <Text color={primaryColor} fontWeight="bold" fontSize={15} textAlign="center">Need live stock for your occasions or farm? request and get what you need, pay back later!</Text>
+            <Text shadow={5} fontSize={20} fontWeight="bold" color={primaryColor}>Coming Soon</Text>
+        </VStack>
+    </View>)
   }
 }
 
