@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import {useDisclose, VStack, HStack, View, Text, Image} from 'native-base';
+import {useDisclose, VStack, HStack, View, Text, Image, ScrollView} from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
 // import Alerts from '../../../components/alert';
 import GrantedNoti from '../../../components/grantedCard';
@@ -38,8 +38,10 @@ export default function HomePage() {
               paddingTop: 40,
               paddingHorizontal: 20,
             }}>
+              <ScrollView
+            contentInsetAdjustmentBehavior="automatic">
             <VStack>
-              <HStack justifyContent="space-around">
+              <HStack justifyContent="space-around" mt={5}>
                 <ButtonCard press={()=> context.routeWithProps({path: "Intro", title: "iou"})}>
                   <Text fontSize={20} fontWeight={'bold'} color={primaryColor}>
                     IOU
@@ -53,13 +55,14 @@ export default function HomePage() {
                   <Image alignSelf="center" size={70} alt='review' source={require("../../../components/images/agri.png")} />
                 </ButtonCard>
               </HStack>
-              <HStack mt={10} justifyContent={'center'}>
+              <HStack mt={10} justifyContent={'center'} mb={10}>
                 <ButtonCard press={()=> context.routeWithProps({path: "Intro", title: "livestock"})}>
                   <Text fontSize={20} fontWeight={'bold'} color={primaryColor}>LIVE STOCK</Text>
                   <Image alignSelf="center" size={70} alt='review' source={require("../../../components/images/farm.png")} />
                 </ButtonCard>
               </HStack>
             </VStack>
+            </ScrollView>
           </View>
 
           {/* {context.errorHandler.show ? (

@@ -1,12 +1,11 @@
 import React from 'react';
 import {Pressable, StyleSheet} from 'react-native';
-import {useDisclose, VStack, HStack, View, Text, Image} from 'native-base';
-import Icon from 'react-native-vector-icons/Ionicons';
-import Context from '../../../libs/stateManagement/context';
+import {VStack, View, Text, Image} from 'native-base';
 import colors, { primaryColor } from '../../../components/colors';
+import Context from '../../../libs/stateManagement/context';
 
 export default function Intro({route}) {
-  const context = React.useContext(Context);
+    const context = React.useContext(Context)
   const {container} = styles;
   const {title} = route.params;
 
@@ -29,7 +28,9 @@ export default function Intro({route}) {
           bg={colors.secondaryColor}>
           <Image alignSelf="center" size={350} alt='review' source={require("../../../components/images/iou_note.png")} />
           <Text color={primaryColor} fontWeight="bold" fontSize={15} textAlign="center">IOU is the place where you can get fast and secure micro loans, with low interest rates</Text>
-          <Pressable style={{backgroundColor: primaryColor, borderRadius: 15, width: "50%", height: 40, justifyContent: 'center', alignItems: 'center', marginVertical: 30}}>
+          <Pressable onPress={() =>
+            {context.user.isRegistered ? null : context._routeToPage("Iou_type")}
+          } style={{backgroundColor: primaryColor, borderRadius: 15, width: "50%", height: 40, justifyContent: 'center', alignItems: 'center', marginVertical: 30}}>
             <Text fontSize={15} fontWeight="bold">Proceed</Text>
           </Pressable>
         </VStack>

@@ -35,13 +35,9 @@ function App() {
             barStyle={'light-content'}
             backgroundColor={backgroundStyle.backgroundColor}
           />
-          {/* <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={backgroundStyle}> */}
           <AppState>
             <Main />
           </AppState>
-          {/* </ScrollView> */}
         </NavigationContainer>
       </SafeAreaView>
     );

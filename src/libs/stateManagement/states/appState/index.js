@@ -18,11 +18,16 @@ export default function AppState(props) {
       loanStatus: 'Not applied',
       isApplied: false,
     },
+    isRegistered: false,
   });
   const [loading, setLoading] = useState(false);
 
-  const routeWithProps = data => {
-    navigation.navigate(data.path, {title: data.title});
+  const routeWithProps = payload => {
+    navigation.navigate(payload.path, {title: payload.title});
+  };
+
+  const _routeToPage = payload => {
+    navigation.navigate(payload);
   };
 
   return (
@@ -32,6 +37,7 @@ export default function AppState(props) {
         loading,
         user,
         routeWithProps,
+        _routeToPage,
       }}>
       {props.children}
     </Context.Provider>

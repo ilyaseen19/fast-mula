@@ -5,7 +5,7 @@ import 'react-native-gesture-handler';
 
 import * as React from 'react';
 import {AppRegistry} from 'react-native';
-import {NativeBaseProvider} from 'native-base';
+import {NativeBaseProvider, extendTheme} from 'native-base';
 import {name as appName} from './app.json';
 import App from './App';
 import AuthState from './src/libs/stateManagement/states/authState';

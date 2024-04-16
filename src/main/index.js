@@ -7,6 +7,7 @@ import Records from './screens/records';
 import Account from './screens/account';
 import Context from '../libs/stateManagement/context';
 import Intro from './screens/home/introductory';
+import IouType from './screens/home/iou_type';
 // import Auth from './screens/auth';
 // import GetLoan from './screens/getLoan';
 // import PaymentMethod from './screens/paymentMethods';
@@ -39,7 +40,7 @@ function HomeScreen() {
             focused ? (
               <Icon name="home" size={35} color={primaryColor} />
             ) : (
-              <Icon name="home-outline" size={size} color={text} />
+              <Icon name="home-outline" size={size} color={primaryColor} />
             ),
         }}
       />
@@ -52,7 +53,7 @@ function HomeScreen() {
             focused ? (
               <Icon name="file-tray-full" size={35} color={primaryColor} />
             ) : (
-              <Icon name="file-tray-full-outline" size={size} color={text} />
+              <Icon name="file-tray-full-outline" size={size} color={primaryColor} />
             ),
         }}
       />
@@ -65,7 +66,7 @@ function HomeScreen() {
             focused ? (
               <Icon name="person-circle" size={35} color={primaryColor} />
             ) : (
-              <Icon name="person-circle-outline" size={size} color={text} />
+              <Icon name="person-circle-outline" size={size} color={primaryColor} />
             ),
         }}
       />
@@ -78,6 +79,7 @@ export default function Main() {
     <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Main" component={HomeScreen} />
       <Stack.Screen name="Intro" component={Intro} />
+      <Stack.Screen name="Iou_type" component={IouType} />
       {/* <Stack.Screen name="Auth" component={Auth} />
       <Stack.Screen name="Loan" component={GetLoan} />
       <Stack.Screen name="Payment_method" component={PaymentMethod} />

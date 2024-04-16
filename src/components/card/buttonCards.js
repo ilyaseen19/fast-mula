@@ -5,7 +5,7 @@ import {Pressable} from 'react-native';
 
 export default function ButtonCard(props) {
   const context = useContext(Context);
-  const {primaryColor, secondaryColor, text, myGrey, danger} = context.colors;
+  const {secondaryColor} = context.colors;
 
   return (
     <Stack space="2" alignItems="center">
