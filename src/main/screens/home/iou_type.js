@@ -24,8 +24,8 @@ export default function IouType() {
             <ScrollView contentInsetAdjustmentBehavior='automatic'>
             <VStack justifyContent="center" alignItems="center">
                 <Image alignSelf="center" size={200} alt='review' source={require("../../../components/images/secure_loan.png")} />
-                <Text color={primaryColor} fontWeight="bold" fontSize={15} textAlign="center">Are you a public worker and receive your salary through payroll system? Sing up Easire and Faster with your Employee ID</Text>
-                <Pressable onPress={() => {}} style={{backgroundColor: primaryColor, borderRadius: 15, width: "50%", height: 40, justifyContent: 'center', alignItems: 'center', marginVertical: 15}}>
+                <Text color={primaryColor} fontWeight="bold" fontSize={15} textAlign="center">Does your company have an MOU wit Fast Mula? Access Cheaper Loans</Text>
+                <Pressable onPress={() => context._routeToPage("Mou_page")} style={{backgroundColor: primaryColor, borderRadius: 15, width: "50%", height: 40, justifyContent: 'center', alignItems: 'center', marginVertical: 15}}>
                     <Text fontSize={15} fontWeight="bold">Start</Text>
                 </Pressable>
             </VStack>

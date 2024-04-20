@@ -1,5 +1,5 @@
-import React, {useContext, useEffect} from 'react';
-import {View, HStack} from 'native-base';
+import React, {useContext} from 'react';
+import {View, HStack, FormControl} from 'native-base';
 import {
   ImageBackground,
   TouchableOpacity,
@@ -8,12 +8,12 @@ import {
   Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Contexts from '../../libs/contexts';
 import ImagePicker from 'react-native-image-crop-picker';
-import storage from '@react-native-firebase/storage';
+import Context from '../../libs/stateManagement/context';
+import colors from '../colors';
 
 export default function UploadImage(props) {
-  const context = useContext(Contexts);
+  const context = useContext(Context);
   const {white} = context.colors;
 
   const requestCameraPermission = async () => {
@@ -23,7 +23,7 @@ export default function UploadImage(props) {
           PermissionsAndroid.PERMISSIONS.CAMERA,
           {
             title: 'Camera Permission',
-            message: 'Pathway Loans needs to use your camera',
+            message: 'Fast Mula Loans needs to access your camera',
           },
         );
         // If CAMERA Permission is granted
@@ -62,7 +62,11 @@ export default function UploadImage(props) {
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
+        marginTop: 20
       }}>
+        <FormControl isRequired>
+          <FormControl.Label>{props.lable}</FormControl.Label>
+        </FormControl>
       <HStack
         h={200}
         borderRadius={10}
@@ -86,13 +90,13 @@ export default function UploadImage(props) {
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: 'green',
-                height: 100,
-                width: 100,
+                backgroundColor: colors.primaryColor,
+                height: 120,
+                width: 120,
                 borderRadius: 100,
               }}>
               <Icon
-                name="ios-camera-outline"
+                name="camera-outline"
                 size={50}
                 color={white}
                 style={{marginRight: 5}}
@@ -121,13 +125,13 @@ export default function UploadImage(props) {
               style={{
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: 'green',
+                backgroundColor: colors.primaryColor,
                 height: 100,
                 width: 100,
                 borderRadius: 100,
               }}>
               <Icon
-                name="ios-camera-outline"
+                name="camera-outline"
                 size={50}
                 color={white}
                 style={{marginRight: 5}}

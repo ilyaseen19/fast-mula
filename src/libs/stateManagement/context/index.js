@@ -8,4 +8,5 @@ export default React.createContext({
   loading: Boolean,
   _changeState: () => {},
   routeWithProps: () => {},
+  _routeToPage: () => {},
 });

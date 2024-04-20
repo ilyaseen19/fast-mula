@@ -27,8 +27,8 @@ export default function AppState(props) {
   };
 
   const _routeToPage = payload => {
-    navigation.navigate(payload);
-  };
+    navigation.navigate(payload)
+  }
 
   return (
     <Context.Provider
