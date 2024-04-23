@@ -1,18 +1,18 @@
 import React, {useContext} from 'react';
-import Contexts from '../../../../libs/contexts';
-import EmergencyContact from './emrergContact';
+// import EmergencyContact from './emrergContact';
 import IdInfo from './idInfo';
-import PesonalInfo from './personalInfo';
-import WorkInfo from './wrokInfo';
+// import PesonalInfo from './personalInfo';
+// import WorkInfo from './wrokInfo';
+import Context from '../../../../libs/stateManagement/context';
 
 export default function Register() {
-  const context = useContext(Contexts);
-  const {registerSteps} = context.system;
+  const context = useContext(Context);
+  const {registeration} = context.user;
 
-  if (registerSteps === 1 || registerSteps === undefined) return <IdInfo />;
-  if (registerSteps === 2) return <PesonalInfo />;
-  if (registerSteps === 3) return <WorkInfo />;
-  if (registerSteps === 4) return <EmergencyContact />;
+  if (registeration === "id") return <IdInfo />;
+  // if (registeration === "personal") return <PesonalInfo />;
+  // if (registeration === "work") return <WorkInfo />;
+  // if (registeration === "emgcont") return <EmergencyContact />;
 
   return null;
 }

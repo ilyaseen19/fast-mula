@@ -33,7 +33,7 @@ export default function IouType() {
             <VStack justifyContent="center" alignItems="center">
                 <Image alignSelf="center" size={250} alt='review' source={require("../../../components/images/unsecured.png")} />
                 <Text color={primaryColor} fontWeight="bold" fontSize={15} textAlign="center">An individual and need an instant loan ? Provide your details and apply now!!</Text>
-                <Pressable onPress={() => {}} style={{backgroundColor: primaryColor, borderRadius: 15, width: "50%", height: 40, justifyContent: 'center', alignItems: 'center', marginVertical: 15}}>
+                <Pressable onPress={() => context._routeToPage("Register")} style={{backgroundColor: primaryColor, borderRadius: 15, width: "50%", height: 40, justifyContent: 'center', alignItems: 'center', marginVertical: 15}}>
                     <Text fontSize={15} fontWeight="bold">Start</Text>
                 </Pressable>
             </VStack>

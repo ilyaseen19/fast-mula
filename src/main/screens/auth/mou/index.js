@@ -5,10 +5,17 @@ import colors from '../../../../components/colors';
 import InputFields from '../../../../components/input/iputField';
 import SelectField from '../../../../components/input/select';
 import UploadImage from '../../../../components/card/uploadImage';
-const cardImage = require("../../../../components/images/idfront.png")
+import DatePicker from '../../../../components/input/datePicker';
+const cardFront = require("../../../../components/images/idfront.png")
+const cardBack = require("../../../../components/images/idback.png")
 
 export default function MouPage() {
   const {container} = styles;
+
+  var today = new Date();
+  const eighteenYearsAgo = today.setFullYear(today.getFullYear() - 18);
+
+  const [date, setDate] = React.useState(new Date(eighteenYearsAgo));
 
   const data = [
     {value: "company 1", lable: "company 1"},
@@ -32,8 +39,10 @@ export default function MouPage() {
             <ScrollView contentInsetAdjustmentBehavior='automatic'>
             <InputFields isRequired={true} value="" isDisabled={false} lable="First Name " placeholder="first name" type="default" />
             <InputFields isRequired={true} value="" isDisabled={false} lable="Last Name " placeholder="last name" type="default" />
+            <DatePicker date={date} lable="Date Of Birth" isRequired={true} isInvalid={false} errMsg="" _onChange={(value) => setDate(value)} placeholder="Please enter your date of birth"  />
             <InputFields isRequired={true} value="" isDisabled={false} lable="NRC Number " placeholder="nrc number" type="default" />
-            <UploadImage lable="Upload NRC" onChange={() => {}} source={null} local={cardImage}  />
+            <UploadImage lable="Upload The Front Side Of Your NRC" onChange={() => {}} source={null} local={cardFront}  />
+            <UploadImage lable="Upload The Back Side Of Your NRC" onChange={() => {}} source={null} local={cardBack}  />
             <InputFields isRequired={true} value="" isDisabled={false} lable="Enter Your Employee/Company ID Number " placeholder="Employee ID Number" type="default" />
             <SelectField lable="Select Your Organisation" isRequired={true} value="" data={data} />
             <Center mt={5}>

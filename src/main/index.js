@@ -9,6 +9,7 @@ import Context from '../libs/stateManagement/context';
 import Intro from './screens/home/introductory';
 import IouType from './screens/home/iou_type';
 import MouPage from './screens/auth/mou';
+import Register from './screens/auth/register';
 // import Auth from './screens/auth';
 // import GetLoan from './screens/getLoan';
 // import PaymentMethod from './screens/paymentMethods';
@@ -82,6 +83,7 @@ export default function Main() {
       <Stack.Screen name="Intro" component={Intro} />
       <Stack.Screen name="Iou_type" component={IouType} />
       <Stack.Screen name="Mou_page" component={MouPage} />
+      <Stack.Screen name="Register" component={Register} />
       {/* <Stack.Screen name="Auth" component={Auth} />
       <Stack.Screen name="Loan" component={GetLoan} />
       <Stack.Screen name="Payment_method" component={PaymentMethod} />

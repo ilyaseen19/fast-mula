@@ -1,5 +1,4 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {
   Text,
@@ -7,48 +6,64 @@ import {
   Input,
   FormControl,
   WarningOutlineIcon,
+  Button,
 } from 'native-base';
+import Icon from "react-native-vector-icons/Ionicons"
+import colors from '../colors';
 
 export default function DatePicker(props) {
-  //   console.log(props.date);
-  const date = new Date(props.date).toLocaleDateString();
+
+  const [show, setShow] = React.useState(false);
 
   var today = new Date();
   const eighteenYearsAgo = today.setFullYear(today.getFullYear() - 18);
 
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    props._onChange(currentDate);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
+
   return (
-    <VStack justifyContent="center" alignItems="center" w="100%" mb={5}>
-      <TouchableOpacity
-        onPress={props.setStatus}
-        style={{
-          width: '100%',
-          height: 40,
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <FormControl
-          isRequired
-          isInvalid={date === new Date().toLocaleDateString() ? true : false}
+    <VStack>
+      <FormControl
+        isRequired={props.isRequired}
+        // isInvalid={props.isRequired ? true : false}
+        w="100%"
+        mt={5}>
+        <FormControl.Label>{props.lable}</FormControl.Label>
+        <Input
+          type="text"
           w="100%"
-          mt={3}>
-          <FormControl.Label>Date of birth</FormControl.Label>
-          <Input isReadOnly value={date} />
-          {props.isInvalid ? (
-            <FormControl.ErrorMessage
-              leftIcon={<WarningOutlineIcon size="xs" />}>
-              {props.errMsg}
-            </FormControl.ErrorMessage>
-          ) : null}
-        </FormControl>
-      </TouchableOpacity>
-      {props.show && (
+          value={new Date(props.date).toLocaleDateString()}
+          isReadOnly
+          variant="underlined"
+          InputRightElement={
+            <Button
+              size="xs"
+              bgColor="#fff"
+              rounded="none"
+              w="1/6"
+              h="full"
+              onPress={showDatepicker}>
+              <Icon name="calendar" color={colors.primaryColor} size={25} />
+            </Button>
+          }
+          placeholder={props.placeholder}
+        />
+      </FormControl>
+      {show && (
         <DateTimePicker
           testID="dateTimePicker"
           value={props.date}
-          mode="date"
           maximumDate={new Date(eighteenYearsAgo)}
-          is24Hour={false}
-          onChange={props.onChange}
+          mode="date"
+          is24Hour={true}
+          onChange={onChange}
         />
       )}
     </VStack>

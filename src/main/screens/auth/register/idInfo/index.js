@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import {View, Text, VStack, Image, ScrollView} from 'native-base';
 import {Pressable} from 'react-native';
-import contexts from '../../../../../libs/contexts';
 import RecordsHeader from '../../../../../components/header/records';
 import UploadImage from '../../../../../components/card/uploadImage';
 import front from '../../../../../components/images/idfront.png';
@@ -9,10 +8,11 @@ import back from '../../../../../components/images/idback.png';
 import InputFields from '../../../../../components/input/iputField';
 import SelectField from '../../../../../components/input/select';
 import Alerts from '../../../../../components/alert';
-import Loader from '../../../../../components/loader';
+// import Loader from '../../../../../components/loader';
+import Context from '../../../../../libs/stateManagement/context';
 
 export default function IdInfo() {
-  const context = useContext(contexts);
+  const context = useContext(Context);
   const {primaryColor, secondaryColor, text} = context.colors;
   const {show, type, msg, title} = context.errorHandler;
   const {idFront, idBack, firstName, lastName, middleName, gender, ghCard} =
@@ -127,7 +127,8 @@ export default function IdInfo() {
               bg={secondaryColor}
               disabled={true}
               color={primaryColor}>
-              <Loader />
+                <Text>Loading</Text>
+              {/* <Loader /> */}
             </View>
           ) : (
             <Pressable

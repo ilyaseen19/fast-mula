@@ -19,7 +19,10 @@ export default function AppState(props) {
       isApplied: false,
     },
     isRegistered: false,
+    isVerified: false,
+    registeration: "id",
   });
+
   const [loading, setLoading] = useState(false);
 
   const routeWithProps = payload => {

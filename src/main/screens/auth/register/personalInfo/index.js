@@ -1,16 +1,16 @@
 import React, {useContext} from 'react';
 import {View, Text, VStack, ScrollView} from 'native-base';
 import {Pressable} from 'react-native';
-import contexts from '../../../../../libs/contexts';
 import RecordsHeader from '../../../../../components/header/records';
 import InputFields from '../../../../../components/input/iputField';
 import SelectField from '../../../../../components/input/select';
 import DatePicker from '../../../../../components/input/datePicker';
 import Alerts from '../../../../../components/alert';
 import Loader from '../../../../../components/loader';
+import Context from '../../../../../libs/stateManagement/context';
 
 export default function PesonalInfo() {
-  const context = useContext(contexts);
+  const context = useContext(Context);
   const {primaryColor, secondaryColor} = context.colors;
   const {show, type, msg, title} = context.errorHandler;
   const {

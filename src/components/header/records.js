@@ -1,11 +1,11 @@
 import React, {useContext} from 'react';
 import {Box, HStack, Text} from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Contexts from '../../libs/contexts';
 import {Pressable} from 'react-native';
+import Context from '../../libs/stateManagement/context';
 
 export default function RecordsHeader(props) {
-  const context = useContext(Contexts);
+  const context = useContext(Context);
   const {primaryColor, secondaryColor} = context.colors;
 
   return (
