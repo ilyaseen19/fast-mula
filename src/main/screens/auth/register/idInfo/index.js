@@ -10,17 +10,18 @@ import SelectField from '../../../../../components/input/select';
 import Alerts from '../../../../../components/alert';
 // import Loader from '../../../../../components/loader';
 import Context from '../../../../../libs/stateManagement/context';
+import colors from '../../../../../components/colors';
 
 export default function IdInfo() {
   const context = useContext(Context);
   const {primaryColor, secondaryColor, text} = context.colors;
-  const {show, type, msg, title} = context.errorHandler;
+  // const {show, type, msg, title} = context.errorHandler;
   const {idFront, idBack, firstName, lastName, middleName, gender, ghCard} =
     context.inputFeilds;
 
   const mgender = [
-    {label: 'MALE', value: 'MALE'},
-    {label: 'FEMALE', value: 'FEMALE'},
+    {value: "Male", lable: "Male"},
+    {value: "Female", lable: "Female"},
   ];
 
   const _handleFront = data => {
@@ -32,14 +33,14 @@ export default function IdInfo() {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: colors.secondaryColor}}>
       <RecordsHeader title="Identity information" />
       <ScrollView>
-        <VStack py={6} justifyContent="center" alignItems="center" w="100%">
-          <Text mb={5} textAlign="center" fontSize={15}>
+        <VStack py={2} px={5} justifyContent="center" alignItems="center" w="100%">
+          <Text mb={2} textAlign="center" fontSize={15}>
             The picture you upload must match your ID card
           </Text>
-          <UploadImage local={front} source={idFront} onChange={_handleFront} />
+          <UploadImage isRequired={false} local={front} source={idFront} onChange={_handleFront} />
           <Text mb={5} color={text} fontSize={15}>
             Upoad the front side of your ID card
           </Text>
@@ -94,7 +95,7 @@ export default function IdInfo() {
               }
               value={gender}
               isRequired={true}
-              lable="Pick Your Gender"
+              lable="Select Your Gender"
               data={mgender}
               errMsg=""
             />
@@ -111,7 +112,7 @@ export default function IdInfo() {
             />
             <Text fontSize={11}>please include the slashes(/)</Text>
           </VStack>
-          {show ? (
+          {/* {show ? (
             <Alerts
               show={show}
               title={title}
@@ -119,8 +120,8 @@ export default function IdInfo() {
               type={type}
               onClose={context._toggleError}
             />
-          ) : null}
-          {context.system.loading ? (
+          ) : null} */}
+          {context.loading ? (
             <View
               mt={25}
               w="70%"

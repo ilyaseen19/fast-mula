@@ -14,7 +14,7 @@ export default function RecordsHeader(props) {
       <HStack bg={primaryColor} px="3" py="3" w="100%">
         <HStack justifyContent="space-between" alignItems="center" w="100%">
           <Pressable onPress={context._goBack}>
-            <Icon name="md-chevron-back" size={30} />
+            <Icon color={secondaryColor} name="chevron-back" size={30} />
           </Pressable>
           <Text color={secondaryColor} fontSize="22" fontWeight="bold">
             {props.title}

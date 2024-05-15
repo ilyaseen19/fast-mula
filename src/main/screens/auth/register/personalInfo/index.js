@@ -8,11 +8,12 @@ import DatePicker from '../../../../../components/input/datePicker';
 import Alerts from '../../../../../components/alert';
 import Loader from '../../../../../components/loader';
 import Context from '../../../../../libs/stateManagement/context';
+import colors from '../../../../../components/colors';
 
 export default function PesonalInfo() {
   const context = useContext(Context);
   const {primaryColor, secondaryColor} = context.colors;
-  const {show, type, msg, title} = context.errorHandler;
+  // const {show, type, msg, title} = context.errorHandler;
   const {
     dob,
     inSchool,
@@ -30,39 +31,39 @@ export default function PesonalInfo() {
   } = context.inputFeilds;
 
   const school = [
-    {label: 'YES', value: 'Yes'},
-    {label: 'NO', value: 'No'},
+    {lable: 'YES', value: 'Yes'},
+    {lable: 'NO', value: 'No'},
   ];
 
   const education = [
-    {label: 'GRADE 12', value: 'Grade 12'},
-    {label: 'SECONDARY', value: 'Secondary'},
-    {label: 'TERTIARY', value: 'Tertiary'},
+    {lable: 'GRADE 12', value: 'Grade 12'},
+    {lable: 'SECONDARY', value: 'Secondary'},
+    {lable: 'TERTIARY', value: 'Tertiary'},
   ];
 
   const residency = [
-    {label: 'OWNED', value: 'OWNED'},
-    {label: 'RENTED', value: 'RENTED'},
+    {lable: 'OWNED', value: 'OWNED'},
+    {lable: 'RENTED', value: 'RENTED'},
   ];
 
   const income = [
-    {label: 'PARENTS', value: 'PARENTS'},
-    {label: 'GUARDIAN', value: 'GUARDIAN'},
-    {label: 'JOB', value: 'JOB'},
+    {lable: 'PARENTS', value: 'PARENTS'},
+    {lable: 'GUARDIAN', value: 'GUARDIAN'},
+    {lable: 'JOB', value: 'JOB'},
   ];
 
   const marital = [
-    {label: 'MARIED', value: 'MARIED'},
-    {label: 'SINGLE', value: 'SINGLE'},
-    {label: 'DIVORCED', value: 'DIVORCED'},
-    {label: 'WIDOWED', value: 'WIDOWED'},
+    {lable: 'MARIED', value: 'MARIED'},
+    {lable: 'SINGLE', value: 'SINGLE'},
+    {lable: 'DIVORCED', value: 'DIVORCED'},
+    {lable: 'WIDOWED', value: 'WIDOWED'},
   ];
 
   const relativesNumber = [
-    {label: '1 - 5', value: '1 -5'},
-    {label: '5 - 8', value: '5 - 8'},
-    {label: '8 - 10', value: '8 - 10'},
-    {label: '10+', value: '10+'},
+    {lable: '1 - 5', value: '1 -5'},
+    {lable: '5 - 8', value: '5 - 8'},
+    {lable: '8 - 10', value: '8 - 10'},
+    {lable: '10+', value: '10+'},
   ];
 
   const _handleShow = () => {
@@ -70,23 +71,21 @@ export default function PesonalInfo() {
   };
 
   const _handleChange = selectedDate => {
-    const date = selectedDate.nativeEvent.timestamp;
-    const value = new Date(date);
-    context._setDialog();
+    const value = new Date(selectedDate);
     context._onChange({field: 'dob', value});
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: colors.secondaryColor}}>
       <RecordsHeader title="Pesonal information" />
       <ScrollView>
-        <VStack py={6} justifyContent="center" alignItems="center" w="100%">
+        <VStack py={3} justifyContent="center" alignItems="center" w="100%">
           <VStack justifyContent="space-around" w="80%">
             <DatePicker
-              setStatus={_handleShow}
               date={dob}
-              onChange={_handleChange}
-              show={context.dialog}
+              isRequired={true}
+              _onChange={_handleChange}
+              lable="Select Your Date Of Birth"
               errMsg=""
             />
             <SelectField
@@ -217,7 +216,7 @@ export default function PesonalInfo() {
               errMsg=""
             />
           </VStack>
-          {show ? (
+          {/* {show ? (
             <Alerts
               show={show}
               title={title}
@@ -225,8 +224,8 @@ export default function PesonalInfo() {
               type={type}
               onClose={context._toggleError}
             />
-          ) : null}
-          {context.system.loading ? (
+          ) : null} */}
+          {context.loading ? (
             <View
               mt={25}
               w="70%"

@@ -4,8 +4,7 @@ import { Select, CheckIcon, FormControl, Center, WarningOutlineIcon} from 'nativ
 export default function SelectField(props) {
   const [service, setService] = React.useState("");
   return (
-    <Center mt={5}>
-      <FormControl w="100%" isRequired={props.isRequired} isInvalid={props.isSubmitted && props.value === "" ? true : false}>
+      <FormControl mt={5} w="100%" isRequired={props.isRequired} isInvalid={props.isSubmitted && props.value === "" ? true : false}>
         <FormControl.Label>{props.lable}</FormControl.Label>
         <Select variant='underlined' placeholder={props.lable} _selectedItem={{
         endIcon: <CheckIcon size={5} />
@@ -22,6 +21,5 @@ export default function SelectField(props) {
         </FormControl.ErrorMessage> : null
         }
       </FormControl>
-    </Center>
   );
 }

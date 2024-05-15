@@ -1,46 +1,43 @@
 import React, {useContext, useEffect} from 'react';
 import {View, Text, VStack, ScrollView} from 'native-base';
 import {Pressable} from 'react-native';
-import contexts from '../../../../../libs/contexts';
 import RecordsHeader from '../../../../../components/header/records';
 import SelectField from '../../../../../components/input/select';
 import Loader from '../../../../../components/loader';
 import Alerts from '../../../../../components/alert';
 import ContatctSelectField from '../../../../../components/input/contact-select';
+import Context from '../../../../../libs/stateManagement/context';
 
 export default function EmergencyContact() {
-  const context = useContext(contexts);
+  const context = useContext(Context);
   const {primaryColor, secondaryColor, myGrey, text} = context.colors;
   const {emergContacts} = context.inputFeilds;
-  const {loading, contacts} = context.system;
-  const {type, show, msg} = context.errorHandler;
+  const {loading, contacts} = context.user;
+  // const {type, show, msg} = context.errorHandler;
 
   useEffect(() => {
     context._getContacts();
   }, []);
 
   const education = [
-    {label: 'GRADE 12', value: 'Grade 12'},
-    {label: 'SECONDARY', value: 'Secondary'},
-    {label: 'TERTIARY', value: 'Tertiary'},
+    {lable: 'GRADE 12', value: 'Grade 12'},
+    {lable: 'SECONDARY', value: 'Secondary'},
+    {lable: 'TERTIARY', value: 'Tertiary'},
   ];
 
   const relationship = [
-    {label: 'PARENT', value: 'Parent'},
-    {label: 'SIBLIN', value: 'Siblin'},
-    {label: 'FRIEND', value: 'Friend'},
-    {label: 'SPOUSE', value: 'Spouse'},
+    {lable: 'PARENT', value: 'Parent'},
+    {lable: 'SIBLIN', value: 'Siblin'},
+    {lable: 'FRIEND', value: 'Friend'},
+    {lable: 'SPOUSE', value: 'Spouse'},
   ];
 
   const _renderContent = () => {
     return (
       <View
         style={{
-          borderWidth: 0.5,
-          borderColor: 'grey',
           width: '100%',
           padding: 5,
-          borderRadius: 10,
         }}>
         <ContatctSelectField
           isRequired={true}
@@ -99,11 +96,8 @@ export default function EmergencyContact() {
     return (
       <View
         style={{
-          borderWidth: 0.5,
-          borderColor: 'grey',
           width: '100%',
           padding: 5,
-          borderRadius: 10,
         }}>
         <ContatctSelectField
           value={emergContacts.contact2.name}
@@ -162,11 +156,8 @@ export default function EmergencyContact() {
     return (
       <View
         style={{
-          borderWidth: 0.5,
-          borderColor: 'grey',
           width: '100%',
           padding: 5,
-          borderRadius: 10,
         }}>
         <ContatctSelectField
           value={emergContacts.contact3.name}
@@ -222,7 +213,7 @@ export default function EmergencyContact() {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: secondaryColor}}>
       <RecordsHeader title="Emergency contacts" />
       <ScrollView>
         <VStack py={6} justifyContent="center" alignItems="center" w="100%">
@@ -258,9 +249,9 @@ export default function EmergencyContact() {
             </Text>
             {_renderContent3()}
           </VStack>
-          {show ? (
+          {/* {show ? (
             <Alerts type={type} msg={msg} onClose={context._toggleError} />
-          ) : null}
+          ) : null} */}
           {loading ? (
             <View
               mt={25}

@@ -1,16 +1,16 @@
 import React, {useContext} from 'react';
 import {View, Text, VStack, ScrollView} from 'native-base';
 import {Pressable} from 'react-native';
-import contexts from '../../../../../libs/contexts';
 import RecordsHeader from '../../../../../components/header/records';
 import InputFields from '../../../../../components/input/iputField';
 import SelectField from '../../../../../components/input/select';
 import Alerts from '../../../../../components/alert';
 import Loader from '../../../../../components/loader';
+import Context from '../../../../../libs/stateManagement/context';
 
 export default function WorkInfo() {
-  const context = useContext(contexts);
-  const {show, type, msg, title} = context.errorHandler;
+  const context = useContext(Context);
+  // const {show, type, msg, title} = context.errorHandler;
   const {primaryColor, secondaryColor} = context.colors;
   const {
     wkUnit,
@@ -24,20 +24,20 @@ export default function WorkInfo() {
   } = context.inputFeilds;
 
   const industry = [
-    {label: 'I.T', value: 'i.t'},
-    {label: 'TRADING', value: 'trading'},
-    {label: 'ARTS', value: 'arts'},
-    {label: 'MEDICAL', value: 'medical'},
-    {label: 'DRIVING', value: 'driving'},
-    {label: 'PLUMBING', value: 'plumbing'},
-    {label: 'WOOD WORKING', value: 'wood working'},
-    {label: 'AUTO MECHANIC', value: 'auto mehanic'},
-    {label: 'MECHANICAL ENGINEER', value: 'mehanical engineer'},
-    {label: 'OTHER', value: 'other'},
+    {lable: 'I.T', value: 'i.t'},
+    {lable: 'TRADING', value: 'trading'},
+    {lable: 'ARTS', value: 'arts'},
+    {lable: 'MEDICAL', value: 'medical'},
+    {lable: 'DRIVING', value: 'driving'},
+    {lable: 'PLUMBING', value: 'plumbing'},
+    {lable: 'WOOD WORKING', value: 'wood working'},
+    {lable: 'AUTO MECHANIC', value: 'auto mehanic'},
+    {lable: 'MECHANICAL ENGINEER', value: 'mehanical engineer'},
+    {lable: 'OTHER', value: 'other'},
   ];
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: secondaryColor}}>
       <RecordsHeader title="Job information" />
       <ScrollView>
         <VStack py={6} justifyContent="center" alignItems="center" w="100%">
@@ -131,7 +131,7 @@ export default function WorkInfo() {
               type="default"
             />
           </VStack>
-          {show ? (
+          {/* {show ? (
             <Alerts
               show={show}
               title={title}
@@ -139,8 +139,8 @@ export default function WorkInfo() {
               type={type}
               onClose={context._toggleError}
             />
-          ) : null}
-          {context.system.loading ? (
+          ) : null} */}
+          {context.loading ? (
             <View
               mt={25}
               w="70%"

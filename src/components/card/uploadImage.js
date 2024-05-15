@@ -45,7 +45,7 @@ export default function UploadImage(props) {
         includeBase64: true,
         useFrontCamera: false,
       }).then(async image => {
-        image.path = image.path.replace('file://', '');
+        image.path = Platform.OS === "android" ? image.path.replace('file://', '') : image.path
         image.name =
           image.modificationDate + image.path.split('/').slice(-1)[0];
         props.onChange(image);
@@ -62,10 +62,10 @@ export default function UploadImage(props) {
         justifyContent: 'center',
         alignItems: 'center',
         width: '100%',
-        marginTop: 20
+        marginTop: 10
       }}>
-        <FormControl isRequired>
-          <FormControl.Label>{props.lable}</FormControl.Label>
+        <FormControl isRequired={props.isRequired}>
+          <FormControl.Label>{props.label}</FormControl.Label>
         </FormControl>
       <HStack
         h={200}
