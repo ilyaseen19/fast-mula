@@ -1,10 +1,10 @@
 import React, {useContext} from 'react';
 import {Box, HStack, VStack, Text} from 'native-base';
-import Contexts from '../../libs/contexts';
 import {Pressable} from 'react-native';
+import Context from '../../libs/stateManagement/context';
 
 export default function RecordsCard(props) {
-  const context = useContext(Contexts);
+  const context = useContext(Context);
   const {primaryColor, secondaryColor, myGrey, white, success} = context.colors;
 
   const _renderLoanStats = status => {
@@ -13,7 +13,6 @@ export default function RecordsCard(props) {
         <HStack>
           <Text
             textAlign="center"
-            // bg={success}
             borderColor={success}
             borderWidth={2}
             padding={0.5}
@@ -31,7 +30,6 @@ export default function RecordsCard(props) {
         <HStack>
           <Text
             textAlign="center"
-            // bg={success}
             borderColor="red.700"
             borderWidth={2}
             padding={0.5}
@@ -49,7 +47,6 @@ export default function RecordsCard(props) {
         <HStack>
           <Text
             textAlign="center"
-            // bg={success}
             borderColor="orange.300"
             borderWidth={2}
             padding={0.5}
@@ -69,7 +66,7 @@ export default function RecordsCard(props) {
     <Box mb={3}>
       <Pressable
         onPress={() => {
-          context._loanDetails(props.loan);
+          // context._loanDetails(props.loan);
         }}>
         <Box
           alignSelf="center"
@@ -89,10 +86,10 @@ export default function RecordsCard(props) {
                 GHS {props.loan.amount}.00
               </Text>
               <Text color={myGrey} fontWeight="bold" fontSize={12} mb={1}>
-                {new Date(props.loan.doa).toUTCString()}
+                {/* {new Date(props.loan.doa).toUTCString()} */}
               </Text>
             </VStack>
-            {_renderLoanStats(props.loan.loanStatus)}
+            {/* {_renderLoanStats(props.loan.loanStatus)} */}
           </HStack>
         </Box>
       </Pressable>

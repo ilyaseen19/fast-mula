@@ -18,6 +18,7 @@ export default function AppState(props) {
     loan: {
       loanStatus: 'Not applied',
       isApplied: false,
+      loans: [{name: "ncvdjhgd", doa: "nmbdcvmb"}]
     },
     contacts: [],
     isRegistered: false,
@@ -67,6 +68,7 @@ export default function AppState(props) {
   });
 
   const [loading, setLoading] = useState(false);
+  const [userType, setUserType] = useState('');
 
   useEffect(() => {
     // _getSysData();
@@ -540,27 +542,32 @@ export default function AppState(props) {
   const _handleIdInfo = () => {
     setUser({
       ...user,
-      registeration: "personal"
-    })
-  }
-  
+      registeration: 'personal',
+    });
+  };
+
   const _handlePesInfo = () => {
     setUser({
       ...user,
-      registeration: "work"
-    })
-  }
-  
+      registeration: 'work',
+    });
+  };
+
   const _hadnleWorkInfo = () => {
     setUser({
       ...user,
-      registeration: "emgcont"
-    })
-  }
+      registeration: 'emgcont',
+    });
+  };
 
   const _handleRegister = () => {
-    _routeToPage("Main")
-  }
+    _routeToPage('Main');
+  };
+
+  const _routeToPhoneCap = data => {
+    setUserType(data);
+    _routeToPage('Phone_capture');
+  };
 
   return (
     <Context.Provider
@@ -569,6 +576,7 @@ export default function AppState(props) {
         loading,
         user,
         inputFeilds,
+        userType,
         _onChange,
         routeWithProps,
         _routeToPage,
@@ -577,7 +585,8 @@ export default function AppState(props) {
         _handleIdInfo,
         _handlePesInfo,
         _hadnleWorkInfo,
-        _handleRegister
+        _handleRegister,
+        _routeToPhoneCap,
       }}>
       {props.children}
     </Context.Provider>

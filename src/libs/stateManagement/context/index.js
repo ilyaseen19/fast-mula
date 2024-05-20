@@ -3,6 +3,7 @@ import React from 'react';
 export default React.createContext({
   colors: Object,
   user: Object,
+  userType: String,
   isBoard: Boolean,
   selectedContact: String,
   loading: Boolean,
@@ -17,4 +18,5 @@ export default React.createContext({
   _handlePesInfo: () => {},
   _hadnleWorkInfo: () => {},
   _handleRegister: () => {},
+  _routeToPhoneCap: () => {}
 });

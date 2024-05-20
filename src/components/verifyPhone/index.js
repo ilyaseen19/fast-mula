@@ -1,47 +1,47 @@
 import React, {useContext, useEffect} from 'react';
 import {View, Text, VStack, HStack, Input} from 'native-base';
 import {Pressable} from 'react-native';
-import Contexts from '../../libs/contexts';
 import Alerts from '../alert';
-import auth from '@react-native-firebase/auth';
+// import auth from '@react-native-firebase/auth';
 import Loader from '../loader';
+import Context from '../../libs/stateManagement/context';
 
-const Auth = auth();
+// const Auth = auth();
 
 export default function VerifyOtp() {
-  const context = useContext(Contexts);
+  const context = useContext(Context);
   const {primaryColor, secondaryColor, white} = context.colors;
   const {phone, code} = context.inputFeilds;
-  const {loading} = context.system;
-  const {show, title, msg, type} = context.errorHandler;
+  const {loading} = context;
+  // const {show, title, msg, type} = context.errorHandler;
 
-  useEffect(() => {
-    Auth.onAuthStateChanged(user => {
-      if (user !== null && !user.isAnonymous) {
-        context.autoVerify();
-      } else null;
-    });
-  }, []);
+  // useEffect(() => {
+  //   Auth.onAuthStateChanged(user => {
+  //     if (user !== null && !user.isAnonymous) {
+  //       context.autoVerify();
+  //     } else null;
+  //   });
+  // }, []);
 
   return (
     <View
       style={{
         flex: 1,
-        backgroundColor: primaryColor,
+        backgroundColor: secondaryColor,
       }}>
       <VStack h="100%" w="100%">
         <VStack h="80%" w="100%" justifyContent="center" alignItems="center">
-          <Text fontSize={22} fontWeight="bold" color={secondaryColor}>
+          <Text fontSize={22} fontWeight="bold" color={primaryColor}>
             Please enter the SMS{' '}
           </Text>
-          <Text fontSize={20} fontWeight="bold" color={secondaryColor}>
+          <Text fontSize={20} fontWeight="bold" color={primaryColor}>
             verification code
           </Text>
-          <Text mt={5} fontSize={15} color={secondaryColor}>
+          <Text mt={5} fontSize={15} color={primaryColor}>
             A verification code has been sent to{' '}
           </Text>
-          <Text alignSelf="center" fontSize={15} color={secondaryColor}>
-            this number +260{' ' + phone}
+          <Text alignSelf="center" fontSize={15} color={primaryColor}>
+            +260{' ' + phone}
           </Text>
           <Input
             variant="underlined"
@@ -51,9 +51,9 @@ export default function VerifyOtp() {
             textAlign="center"
             value={code}
             padding={0}
-            color={"#ccc"}
+            color={primaryColor}
             fontSize={20}
-            borderBottomColor={secondaryColor}
+            borderBottomColor={primaryColor}
             onChangeText={code =>
               context._onChange({field: 'code', value: code})
             }
@@ -64,7 +64,7 @@ export default function VerifyOtp() {
             <View
               mt={25}
               w="70%"
-              bg={secondaryColor}
+              bg={primaryColor}
               disabled={true}
               color={primaryColor}>
               <Loader />
@@ -73,34 +73,38 @@ export default function VerifyOtp() {
             <Pressable
               mt={25}
               w="70%"
-              bg={secondaryColor}
+              bg={primaryColor}
               color={primaryColor}
               style={{
                 width: '80%',
-                backgroundColor: secondaryColor,
+                backgroundColor: primaryColor,
                 borderRadius: 10,
                 height: 50,
                 alignItems: 'center',
                 justifyContent: 'center',
                 marginTop: 15,
               }}
-              onPress={context._verifyPhone}
-              >
-              <Text fontSize={18} color={primaryColor}>
+              onPress={() => {
+                // context._verifyPhone
+                context.userType !== '' && context.userType === 'mou'
+                  ? context._routeToPage('Mou_page')
+                  : context._routeToPage('Register');
+              }}>
+              <Text fontSize={18} fontWeight="bold" color={secondaryColor}>
                 Verify
               </Text>
             </Pressable>
           )}
         </VStack>
-        {show ? (
+        {/* {show ? (
           <Alerts
             title={title}
             msg={msg}
             type={type}
             onClose={context._toggleError}
           />
-        ) : null}
-        <HStack h="20%" w="100%" bg={white} borderTopLeftRadius={190}></HStack>
+        ) : null} */}
+        {/* <HStack h="20%" w="100%" bg={white} borderTopLeftRadius={190}></HStack> */}
       </VStack>
     </View>
   );
