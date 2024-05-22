@@ -7,22 +7,24 @@ export default function RecordsCard(props) {
   const context = useContext(Context);
   const {primaryColor, secondaryColor, myGrey, white, success} = context.colors;
 
-  const _renderLoanStats = status => {
+  const _renderLoanStats = ({status, paymentStatus}) => {
     if (status === 'Granted')
       return (
-        <HStack>
+        <VStack>
           <Text
             textAlign="center"
-            borderColor={success}
-            borderWidth={2}
             padding={0.5}
-            borderRadius={7}
             color={success}
-            fontWeight="bold"
             fontSize={18}>
             Granted
           </Text>
-        </HStack>
+          <Text
+            textAlign="center"
+            color={primaryColor}
+            fontSize={15}>
+            {paymentStatus}
+          </Text>
+        </VStack>
       );
 
     if (status === 'Rejected')
@@ -30,12 +32,7 @@ export default function RecordsCard(props) {
         <HStack>
           <Text
             textAlign="center"
-            borderColor="red.700"
-            borderWidth={2}
-            padding={0.5}
-            borderRadius={7}
             color="red.700"
-            fontWeight="bold"
             fontSize={18}>
             Rejected
           </Text>
@@ -47,14 +44,9 @@ export default function RecordsCard(props) {
         <HStack>
           <Text
             textAlign="center"
-            borderColor="orange.300"
-            borderWidth={2}
-            padding={0.5}
-            borderRadius={7}
             color="orange.300"
-            fontWeight="bold"
             fontSize={18}>
-            Review
+            Under Review
           </Text>
         </HStack>
       );
@@ -74,7 +66,7 @@ export default function RecordsCard(props) {
           bg={white}
           mt={3}
           h={100}
-          borderRadius={5}
+          borderRadius={10}
           shadow={1}
           p={3}>
           <HStack h="100%" justifyContent="space-between" alignItems="center">
@@ -83,13 +75,13 @@ export default function RecordsCard(props) {
                 Loan amount
               </Text>
               <Text color={primaryColor} fontWeight="bold" fontSize={20} mb={1}>
-                GHS {props.loan.amount}.00
+                ZMW {props.loan.amount}.00
               </Text>
               <Text color={myGrey} fontWeight="bold" fontSize={12} mb={1}>
-                {/* {new Date(props.loan.doa).toUTCString()} */}
+                {new Date(props.loan.doa).toDateString()}
               </Text>
             </VStack>
-            {/* {_renderLoanStats(props.loan.loanStatus)} */}
+            {_renderLoanStats({status: props.loan.loanStatus, paymentStatus: props.loan.paymentStatus})}
           </HStack>
         </Box>
       </Pressable>

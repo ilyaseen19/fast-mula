@@ -18,7 +18,7 @@ export default function AppState(props) {
     loan: {
       loanStatus: 'Not applied',
       isApplied: false,
-      loans: [{name: "ncvdjhgd", doa: "nmbdcvmb"}]
+      loans: [{loanStatus: "Granted", paymentStatus: "Paid", amount: 500, doa: "05-05-2024"}]
     },
     contacts: [],
     isRegistered: false,
