@@ -6,10 +6,12 @@ import InputFields from '../../../../components/input/iputField';
 import SelectField from '../../../../components/input/select';
 import UploadImage from '../../../../components/card/uploadImage';
 import DatePicker from '../../../../components/input/datePicker';
+import Context from '../../../../libs/stateManagement/context';
 const cardFront = require('../../../../components/images/idfront.png');
 const cardBack = require('../../../../components/images/idback.png');
 
 export default function MouPage() {
+  const context = React.useContext(Context);
   const {container} = styles;
 
   var today = new Date();
@@ -99,7 +101,7 @@ export default function MouPage() {
           />
           <Center mt={5}>
             <Pressable
-              onPress={() => {}}
+              onPress={context._handleRegister}
               style={{
                 backgroundColor: colors.primaryColor,
                 borderRadius: 15,

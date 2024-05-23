@@ -11,6 +11,7 @@ import Loader from '../../../components/loader';
 // import Alerts from '../../../components/alert';
 import Context from '../../../libs/stateManagement/context';
 import {_calcInterest} from '../../../libs/functions/interests';
+import {Image} from 'react-native-svg';
 
 export default function GetLoan() {
   const context = useContext(Context);
@@ -54,9 +55,7 @@ export default function GetLoan() {
       <ScrollView>
         <View justifyContent="center" alignItems="center">
           {context.user === null || !context.user.isRegistered ? (
-            <View mt={6}>
-              <Text>Please make sure you are connected to the internet</Text>
-            </View>
+            <Text>Make sure you are connected to the Internet or Registered</Text>
           ) : (
             <>
               <LoanCard />
@@ -218,7 +217,11 @@ export default function GetLoan() {
                   <Text color={primaryColor} fontWeight="bold" fontSize={18}>
                     Next step
                   </Text>
-                  <Icon color={primaryColor} name="chevron-forward-circle-outline" size={30} />
+                  <Icon
+                    color={primaryColor}
+                    name="chevron-forward-circle-outline"
+                    size={30}
+                  />
                 </HStack>
               </Pressable>
             </>

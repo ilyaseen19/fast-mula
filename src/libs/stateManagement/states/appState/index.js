@@ -18,10 +18,10 @@ export default function AppState(props) {
     loan: {
       loanStatus: 'Not applied',
       isApplied: false,
-      loans: []
+      loans: [{paymentStatus: "Paid", loanStatus: "Granted", amount: 100, doa: "22-05-2024"}]
     },
     contacts: [],
-    isRegistered: true,
+    isRegistered: false,
     isVerified: false,
     registeration: 'id',
     terms: false
@@ -573,6 +573,10 @@ export default function AppState(props) {
   };
 
   const _handleRegister = () => {
+    setUser({
+      ...user,
+      isRegistered: true
+    })
     _routeToPage('Main');
   };
 
