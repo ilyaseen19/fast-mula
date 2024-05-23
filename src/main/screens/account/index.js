@@ -1,16 +1,17 @@
 import React, {useContext} from 'react';
-// import {
-//   View,
-//   Text,
-//   HStack,
-//   VStack,
-//   Badge,
-//   Center,
-//   Actionsheet,
-//   Box,
-//   useDisclose,
-// } from 'native-base';
-import {Pressable, Linking, Text, View} from 'react-native';
+import {
+  View,
+  Text,
+  HStack,
+  VStack,
+  Badge,
+  Center,
+  Actionsheet,
+  Box,
+  useDisclose,
+  Image,
+} from 'native-base';
+import {Pressable, Linking} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {callNumber} from '../../../components/makeCall';
 import Context from '../../../libs/stateManagement/context';
@@ -19,7 +20,7 @@ export default function Account() {
   const context = useContext(Context);
   const {primaryColor, secondaryColor, text, danger} = context.colors;
   const user = context.user;
-  // const {isOpen, onOpen, onClose} = useDisclose();
+  const {isOpen, onOpen, onClose} = useDisclose();
 
   const customerService = '09700000000056';
 
@@ -27,39 +28,60 @@ export default function Account() {
     <View
       style={{
         flex: 1,
-        backgroundColor: primaryColor,
+        backgroundColor:
+          user === null || !user.isRegistered ? secondaryColor : primaryColor,
       }}>
-      {/* <VStack flex={1}>
-        <HStack
-          w="100%"
-          h="20%"
-          mt={10}
-          py={5}
-          justifyContent="center"
-          alignItems="center">
-          <VStack justifyContent="center" alignItems="center">
-            <Text fontSize={20} fontWeight="bold">
-              {user !== null && user.isRegistered
-                ? user.IDinfo.firstName + ' ' + user.IDinfo.lastName
-                : 'You are not registerd'}
-            </Text>
-            <Badge colorScheme={danger} borderRadius={10}>
-              {user !== null && user.isRegistered
-                ? 'level ' + user.level
-                : 'please register'}
-            </Badge>
-          </VStack>
-        </HStack>
-        {user === null ? null : (
+      <VStack flex={1}>
+        {user === null || !user.isRegistered ? (
+          <Center flex={1} alignItems="center">
+            <Image
+              alignSelf="center"
+              size={300}
+              alt="review"
+              source={require('../../../components/images/login.png')}
+            />
+            <Text color={primaryColor}>You are not registered</Text>
+            <Pressable
+              onPress={()=> context.routeWithProps({path: "Intro", title: "iou"})}
+              style={{
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderWidth: 2,
+                borderColor: primaryColor,
+                borderRadius: 10,
+                width: '80%',
+                height: 40,
+                marginTop: 10
+              }}>
+              <Text color={primaryColor} fontSize={15}>
+                Register
+              </Text>
+            </Pressable>
+          </Center>
+        ) : (
           <VStack
             w="100%"
-            h="80%"
-            bg="#e3e4e6"
+            h="95%"
+            bg={secondaryColor}
             pt={6}
             px={3}
             pb={12}
+            mt="auto"
             borderTopLeftRadius={50}
             borderTopRightRadius={50}>
+            <HStack
+              w="100%"
+              h="15%"
+              py={5}
+              justifyContent="center"
+              alignItems="center">
+              <VStack justifyContent="center" alignItems="center">
+                <Text fontSize={20} fontWeight="bold">
+                  Adongo Mamboi
+                  {/* {user.IDinfo.firstName + ' ' + user.IDinfo.lastName} */}
+                </Text>
+              </VStack>
+            </HStack>
             <View flex={1}>
               <Pressable
                 onPress={() => context._routeToPage('Profile')}
@@ -71,7 +93,7 @@ export default function Account() {
                 <HStack justifyContent="space-between" alignItems="center">
                   <HStack alignItems="center">
                     <Icon
-                      name="md-person-outline"
+                      name="person-outline"
                       size={22}
                       style={{marginRight: 10}}
                       color={primaryColor}
@@ -81,7 +103,7 @@ export default function Account() {
                     </Text>
                   </HStack>
                   <Icon
-                    name="md-chevron-forward-circle-outline"
+                    name="chevron-forward-circle-outline"
                     size={22}
                     color={primaryColor}
                   />
@@ -97,7 +119,7 @@ export default function Account() {
                 <HStack justifyContent="space-between" alignItems="center">
                   <HStack alignItems="center">
                     <Icon
-                      name="ios-card"
+                      name="card-outline"
                       size={22}
                       style={{marginRight: 10}}
                       color={primaryColor}
@@ -107,16 +129,16 @@ export default function Account() {
                     </Text>
                   </HStack>
                   <Icon
-                    name="md-chevron-forward-circle-outline"
+                    name="chevron-forward-circle-outline"
                     size={22}
                     color={primaryColor}
                   />
                 </HStack>
               </Pressable>
               <Pressable
-                onPress={() => {
-                  Linking.openURL('https://pathwaygh.com/privacy.html');
-                }}
+                // onPress={() => {
+                //   Linking.openURL('https://pathwaygh.com/privacy.html');
+                // }}
                 style={{
                   justifyContent: 'center',
                   padding: 5,
@@ -125,7 +147,7 @@ export default function Account() {
                 <HStack justifyContent="space-between" alignItems="center">
                   <HStack alignItems="center">
                     <Icon
-                      name="md-lock-closed-outline"
+                      name="lock-closed-outline"
                       size={22}
                       style={{marginRight: 10}}
                       color={primaryColor}
@@ -135,7 +157,7 @@ export default function Account() {
                     </Text>
                   </HStack>
                   <Icon
-                    name="md-chevron-forward-circle-outline"
+                    name="chevron-forward-circle-outline"
                     size={22}
                     color={primaryColor}
                   />
@@ -151,7 +173,7 @@ export default function Account() {
                 <HStack justifyContent="space-between" alignItems="center">
                   <HStack alignItems="center">
                     <Icon
-                      name="md-information-circle-outline"
+                      name="information-circle-outline"
                       size={22}
                       style={{marginRight: 10}}
                       color={primaryColor}
@@ -161,7 +183,7 @@ export default function Account() {
                     </Text>
                   </HStack>
                   <Icon
-                    name="md-chevron-forward-circle-outline"
+                    name="chevron-forward-circle-outline"
                     size={22}
                     color={primaryColor}
                   />
@@ -177,17 +199,17 @@ export default function Account() {
                 <HStack justifyContent="space-between" alignItems="center">
                   <HStack alignItems="center">
                     <Icon
-                      name="md-headset-outline"
+                      name="headset-outline"
                       size={22}
                       style={{marginRight: 10}}
                       color={primaryColor}
                     />
                     <Text color={text} fontSize={18} fontWeight="bold">
-                      Customer service
+                      Contact Us
                     </Text>
                   </HStack>
                   <Icon
-                    name="md-chevron-forward-circle-outline"
+                    name="chevron-forward-circle-outline"
                     size={22}
                     color={primaryColor}
                   />
@@ -246,8 +268,7 @@ export default function Account() {
             </Actionsheet.Content>
           </Actionsheet>
         </Center>
-      </VStack> */}
-      <Text>Account</Text>
+      </VStack>
     </View>
   );
 }

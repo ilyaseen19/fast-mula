@@ -4,10 +4,15 @@ export default React.createContext({
   colors: Object,
   user: Object,
   userType: String,
+  interestRate: String,
+  loanAmount: Number,
   isBoard: Boolean,
   selectedContact: String,
   loading: Boolean,
+  paymentVerify: Boolean,
+  getOtp: Boolean,
   inputFeilds: Object,
+  selfie: Object,
   _changeState: () => {},
   routeWithProps: () => {},
   _routeToPage: () => {},
@@ -18,5 +23,6 @@ export default React.createContext({
   _handlePesInfo: () => {},
   _hadnleWorkInfo: () => {},
   _handleRegister: () => {},
-  _routeToPhoneCap: () => {}
+  _routeToPhoneCap: () => {},
+  _confirmPaymentMethod: () => {}
 });

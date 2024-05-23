@@ -3,6 +3,7 @@ import {View, ScrollView, Text} from 'react-native';
 import RecordsHeader from '../../../components/header/records';
 // import InfoView from '../../../components/card/info';
 import Context from '../../../libs/stateManagement/context';
+import {secondaryColor} from '../../../components/colors';
 
 export default function UserProfile() {
   const context = React.useContext(Context);
@@ -59,8 +60,14 @@ export default function UserProfile() {
   // };
 
   return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      {/* <RecordsHeader title="Account Info" /> */}
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: secondaryColor,
+      }}>
+      <RecordsHeader title="Account Info" />
       <ScrollView>
         <View
           style={{
@@ -89,7 +96,7 @@ export default function UserProfile() {
             With higher levels, you will be bale to get bigger deals. Borrow
             more to upgrade your level.
           </Text> */}
-          <Text>Account</Text>
+          <Text style={{color: primaryColor}}>Account details will show here</Text>
         </View>
       </ScrollView>
     </View>

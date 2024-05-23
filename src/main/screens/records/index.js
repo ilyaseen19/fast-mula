@@ -4,6 +4,7 @@ import RecordsCard from '../../../components/card';
 import RecordsHeader from '../../../components/header/records';
 import Context from '../../../libs/stateManagement/context';
 import colors from '../../../components/colors';
+import {Center, Image, VStack} from 'native-base';
 
 export default function Records() {
   const context = React.useContext(Context);
@@ -17,9 +18,22 @@ export default function Records() {
         {loan === undefined ||
         loan.loans === null ||
         loan.loans.length === 0 ? (
-          <Text style={{color: colors.primaryColor, alignSelf: 'center', marginTop: 10}}>
-            No records found
-          </Text>
+          <Center flex={1} alignItems="center">
+            <Image
+              alignSelf="center"
+              size={300}
+              alt="review"
+              source={require('../../../components/images/no_data.png')}
+            />
+            <Text
+              style={{
+                color: colors.primaryColor,
+                alignSelf: 'center',
+                marginTop: 10,
+              }}>
+              No records found
+            </Text>
+          </Center>
         ) : (
           loan.loans.map((ln, index) => {
             return <RecordsCard key={index} loan={ln} />;

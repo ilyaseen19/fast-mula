@@ -1,23 +1,23 @@
 import React, {useContext, useEffect} from 'react';
 import {View, Text, VStack, Image, ScrollView, Checkbox} from 'native-base';
 import {Pressable, Linking} from 'react-native';
-import Contexts from '../../../libs/contexts';
 import RecordsHeader from '../../../components/header/records';
 import selfie from '../../../components/images/selfie.png';
 import SelfieImage from '../../../components/card/selfieImage';
 import Loader from '../../../components/loader';
-import Alerts from '../../../components/alert';
+// import Alerts from '../../../components/alert';
+import Context from '../../../libs/stateManagement/context';
 
 export default function VerifyPic() {
-  const context = useContext(Contexts);
+  const context = useContext(Context);
   const {primaryColor, secondaryColor} = context.colors;
 
-  useEffect(() => {
-    context._getLoc();
-  }, []);
+  // useEffect(() => {
+  //   context._getLoc();
+  // }, []);
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, backgroundColor: secondaryColor}}>
       <RecordsHeader title="Selfie pic verification" />
       <ScrollView>
         <VStack
@@ -32,7 +32,7 @@ export default function VerifyPic() {
 
           <SelfieImage
             local={selfie}
-            source={context.newLoan.selfie}
+            source={context.selfie}
             onChange={value =>
               context._onChange({
                 field: 'selfieIm',
@@ -50,7 +50,7 @@ export default function VerifyPic() {
           />
 
           <Checkbox
-            isChecked={context.newLoan.terms}
+            isChecked={context.user.terms}
             w="80%"
             onChange={value =>
               context._handleCheck({
@@ -58,15 +58,15 @@ export default function VerifyPic() {
                 value,
               })
             }
-            value={context.system.terms}
+            value={context.user.terms}
             colorScheme="green">
             I have read and agreed to the terms and conditions
           </Checkbox>
 
           <Pressable
-            onPress={() => {
-              Linking.openURL('https://pathwaygh.com/privacy.html');
-            }}
+            // onPress={() => {
+            //   Linking.openURL('https://pathwaygh.com/privacy.html');
+            // }}
             style={{
               justifyContent: 'center',
               padding: 5,
@@ -75,29 +75,31 @@ export default function VerifyPic() {
             <Text color="blue.400">Terms & Conditions</Text>
           </Pressable>
 
-          {context.errorHandler.show ? (
+          {/* {context.errorHandler.show ? (
             <Alerts
               type={context.errorHandler.type}
               msg={context.errorHandler.msg}
               onClose={context._toggleError}
             />
-          ) : null}
+          ) : null} */}
 
           <Pressable
-            onPress={context.system.loading ? null : context._getLoan}
+            // onPress={context.loading ? null : context._getLoan}
             style={{
-              backgroundColor: primaryColor,
+              backgroundColor: secondaryColor,
               alignItems: 'center',
               justifyContent: 'center',
               borderRadius: 10,
+              borderWidth: 0.5,
+              borderColor: primaryColor,
               width: '50%',
               height: 40,
               marginTop: 30,
             }}>
-            {context.system.loading ? (
+            {context.loading ? (
               <Loader />
             ) : (
-              <Text color={secondaryColor} fontWeight="bold" fontSize={16}>
+              <Text color={primaryColor} fontWeight="bold" fontSize={16}>
                 Apply
               </Text>
             )}

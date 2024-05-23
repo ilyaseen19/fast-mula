@@ -13,14 +13,14 @@ import Register from './screens/auth/register';
 import PhoneCap from '../components/phoneCapture';
 import VerifyOtp from '../components/verifyPhone';
 // import Auth from './screens/auth';
-// import GetLoan from './screens/getLoan';
-// import PaymentMethod from './screens/paymentMethods';
-// import AddPaymentMethod from './screens/paymentMethods/addPaymentMethod';
-// import VerifyPic from './screens/verifyPic';
+import GetLoan from './screens/getLoan';
+import PaymentMethod from './screens/paymentMethods';
+import AddPaymentMethod from './screens/paymentMethods/addPaymentMethod';
+import VerifyPic from './screens/verifyPic';
 // import LoanDetails from './screens/records/loanDetails';
-// import AboutUs from './screens/about';
-// import PrivacyPolicy from './screens/privacy';
-// import UserProfile from './screens/userAcount';
+import AboutUs from './screens/about';
+import PrivacyPolicy from './screens/privacy';
+import UserProfile from './screens/userAcount';
 // import UserNotifi from './screens/notifications';
 // import PatialPay from './screens/home/payments/partialPayment';
 // import FullPay from './screens/home/payments/fullPayment';
@@ -88,14 +88,15 @@ export default function Main() {
       <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Phone_capture" component={PhoneCap} />
       <Stack.Screen name="Verify_phone" component={VerifyOtp} />
-      {/* <Stack.Screen name="Loan" component={GetLoan} />
+      <Stack.Screen name="Profile" component={UserProfile} />
       <Stack.Screen name="Payment_method" component={PaymentMethod} />
       <Stack.Screen name="Add_payment_method" component={AddPaymentMethod} />
-      <Stack.Screen name="Verify_pic" component={VerifyPic} />
-      <Stack.Screen name="Loan_details" component={LoanDetails} />
-      <Stack.Screen name="About_us" component={AboutUs} />
       <Stack.Screen name="Privacy" component={PrivacyPolicy} />
-      <Stack.Screen name="Profile" component={UserProfile} />
+      <Stack.Screen name="About_us" component={AboutUs} />
+      <Stack.Screen name="Loan" component={GetLoan} />
+      <Stack.Screen name="Verify_pic" component={VerifyPic} />
+      {/* 
+      <Stack.Screen name="Loan_details" component={LoanDetails} />
       <Stack.Screen name="Notifications" component={UserNotifi} />
       <Stack.Screen name="partial_payment" component={PatialPay} />
       <Stack.Screen name="full_payment" component={FullPay} />

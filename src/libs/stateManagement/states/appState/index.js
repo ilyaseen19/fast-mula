@@ -18,12 +18,13 @@ export default function AppState(props) {
     loan: {
       loanStatus: 'Not applied',
       isApplied: false,
-      loans: [{loanStatus: "Granted", paymentStatus: "Paid", amount: 500, doa: "05-05-2024"}]
+      loans: []
     },
     contacts: [],
-    isRegistered: false,
+    isRegistered: true,
     isVerified: false,
     registeration: 'id',
+    terms: false
   });
 
   var today = new Date();
@@ -48,6 +49,12 @@ export default function AppState(props) {
     lnmkResi: '',
     resiTime: '',
     incomeSource: '',
+    paymentMethod:"",
+    loanRepaymentPeriod: "",
+    wHeard: "",
+    useLoan: "",
+    paymentEmail: "",
+    networkOperator: "",
     nRelCare: '',
     email: '',
     bPhone: '',
@@ -68,7 +75,12 @@ export default function AppState(props) {
   });
 
   const [loading, setLoading] = useState(false);
+  const [paymentVerify, setPaymentVerify] = useState(false);
+  const [getOtp, setGetOtp] = useState(true);
   const [userType, setUserType] = useState('');
+  const [interestRate, setInterestRate] = useState('');
+  const [loanAmount, setLoanAmout] = useState(0);
+  const [selfie, setSelfie] = useState(null);
 
   useEffect(() => {
     // _getSysData();
@@ -472,20 +484,20 @@ export default function AppState(props) {
       });
 
     if (field === 'paymentMethod')
-      return setSystem({
-        ...system,
+      return setInput({
+        ...inputFeilds,
         paymentMethod: value,
       });
 
     if (field === 'paymentEmail')
-      return setSystem({
-        ...system,
+      return setInput({
+        ...inputFeilds,
         paymentEmail: value,
       });
 
     if (field === 'ntOp')
-      return setSystem({
-        ...system,
+      return setInput({
+        ...inputFeilds,
         networkOperator: value,
       });
 
@@ -569,6 +581,10 @@ export default function AppState(props) {
     _routeToPage('Phone_capture');
   };
 
+  const _confirmPaymentMethod = () => {
+    setGetOtp(false)
+  }
+
   return (
     <Context.Provider
       value={{
@@ -577,6 +593,11 @@ export default function AppState(props) {
         user,
         inputFeilds,
         userType,
+        paymentVerify,
+        getOtp,
+        interestRate,
+        loanAmount,
+        selfie,
         _onChange,
         routeWithProps,
         _routeToPage,
@@ -587,6 +608,7 @@ export default function AppState(props) {
         _hadnleWorkInfo,
         _handleRegister,
         _routeToPhoneCap,
+        _confirmPaymentMethod
       }}>
       {props.children}
     </Context.Provider>

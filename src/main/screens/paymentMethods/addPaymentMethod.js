@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import {View, Text, ScrollView, VStack, HStack, Input} from 'native-base';
-import Contexts from '../../../libs/contexts';
 import RecordsHeader from '../../../components/header/records';
 import {Pressable} from 'react-native';
 import InputFields from '../../../components/input/iputField';
@@ -8,19 +7,18 @@ import SelectField from '../../../components/input/select';
 import Loader from '../../../components/loader';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Alerts from '../../../components/alert';
+import Context from '../../../libs/stateManagement/context';
 
 export default function AddPaymentMethod() {
-  const context = useContext(Contexts);
+  const context = useContext(Context);
   const {primaryColor, secondaryColor, myGrey} = context.colors;
-  const {show, msg, type} = context.errorHandler;
+  // const {show, msg, type} = context.errorHandler;
   const {
     paymentMethod,
     paymentEmail,
     networkOperator,
-    paymentVerify,
-    loading,
-    getOtp,
-  } = context.system;
+  } = context.inputFeilds;
+  const {paymentVerify, loading, getOtp} = context
 
   const networkData = [
     {label: 'MTN', value: 'MTN'},
@@ -92,7 +90,7 @@ export default function AddPaymentMethod() {
               px={3}>
               <Icon
                 color="white"
-                name="md-checkmark-circle-outline"
+                name="checkmark-circle-outline"
                 size={30}
               />
             </HStack>
@@ -120,22 +118,22 @@ export default function AddPaymentMethod() {
                           alignItems: 'center',
                           height: 35,
                         }}>
-                        <Text fontWeight="bold" color="blue.500">
-                          get otp
+                        <Text fontWeight="bold" color={primaryColor}>
+                          Get OTP
                         </Text>
                       </Pressable>
                     </>
                   ) : (
                     <HStack alignItems="center">
                       <Pressable
-                        onPress={context._verifyPayment}
+                        // onPress={context._verifyPayment}
                         style={{
                           width: '50%',
                           justifyContent: 'center',
                           alignItems: 'center',
                           height: 35,
                         }}>
-                        <Text fontWeight="bold" color="blue.500">
+                        <Text fontWeight="bold" color={primaryColor}>
                           Press to verify otp
                         </Text>
                       </Pressable>
@@ -154,16 +152,16 @@ export default function AddPaymentMethod() {
               )}
             </HStack>
           )}
-          {show ? (
+          {/* {show ? (
             <Alerts type={type} msg={msg} onClose={context._toggleError} />
-          ) : null}
+          ) : null} */}
 
           <Pressable
-            onPress={loading ? null : context._bindPaymentMethod}
+            // onPress={loading ? null : context._bindPaymentMethod}
             disabled={getOtp ? true : false}
             style={{
               width: '50%',
-              height: 50,
+              height: 35,
               marginTop: 60,
               backgroundColor: primaryColor,
               borderRadius: 5,

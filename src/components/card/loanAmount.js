@@ -1,18 +1,16 @@
 import React, {useContext} from 'react';
-import {View, Text,HStack} from 'native-base';
+import {View, Text, HStack, Input} from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Contexts from '../../libs/contexts';
 import {Pressable} from 'react-native';
 import Loader from '../loader';
+import Context from '../../libs/stateManagement/context';
+import InputFields from '../input/iputField';
 
 export default function LoanCard() {
-  const context = useContext(Contexts);
+  const context = useContext(Context);
   const {secondaryColor, text, myGrey, danger, primaryColor} = context.colors;
   const {level} = context.user !== null ? context.user : '';
-  const {levels, loading} = context.system;
-  const {loanAmount} = context.newLoan;
-
-  let lv = levels.filter(lev => lev.level === level);
+  const {loading, loanAmount} = context;
 
   return (
     <View
@@ -21,9 +19,9 @@ export default function LoanCard() {
       justifyContent="center"
       mt={6}
       h={130}
-      borderRadius={10}
-      bg={primaryColor}
-      shadow={5}
+      // borderRadius={10}
+      bg={secondaryColor}
+      // shadow={1}
       w="90%">
       {loading ? (
         <View alignSelf="center">
@@ -32,101 +30,71 @@ export default function LoanCard() {
         </View>
       ) : (
         <>
-          <Text color={secondaryColor} fontSize={18} fontWeight="bold">
-            Pick loan amount
+          <Text color={primaryColor} fontSize={18} fontWeight="bold">
+            Enter loan amount
           </Text>
-          <Text textAlign="center" color={secondaryColor} fontSize={13} fontWeight="bold">
-            level: {level}
-          </Text>
-          <Text textAlign="center" color={secondaryColor} fontSize={13} fontWeight="bold">
-            loan limit: zmw{lv[0] !== undefined ? lv[0].limit : 0}
-          </Text>
-          <HStack justifyContent="center" alignItems="center">
-            {loanAmount === 100 ? (
-              <View
-                style={{
-                  padding: 5,
-                  margin: 3,
-                  width: 50,
-                  height: 50,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Icon name="md-chevron-back-circle" color={myGrey} size={30} />
-              </View>
-            ) : (
-              <Pressable
-                onPress={() =>
-                  context._onChange({
-                    field: 'loanAmount-minus',
-                    value: loanAmount,
-                  })
-                }
-                style={{
-                  padding: 5,
-                  margin: 3,
-                  width: 50,
-                  height: 50,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Icon name="md-chevron-back-circle" color={danger} size={30} />
-              </Pressable>
-            )}
-            <View
-              style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '40%',
-                height: 50,
-              }}>
-              <Text fontSize={25} fontWeight="bold">
-                {loanAmount}
-              </Text>
-            </View>
-            {(lv[0] !== undefined && loanAmount < lv[0].limit) ||
-            (lv[0] !== undefined && lv[0].level >= '9') ? (
-              <Pressable
-                onPress={() =>
-                  context._onChange({
-                    field: 'loanAmount-plus',
-                    value: loanAmount,
-                  })
-                }
-                style={{
-                  padding: 5,
-                  margin: 3,
-                  width: 50,
-                  height: 50,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Icon
-                  name="md-chevron-forward-circle"
-                  color={danger}
-                  size={30}
-                />
-              </Pressable>
-            ) : (
-              <View
-                style={{
-                  padding: 5,
-                  margin: 3,
-                  width: 50,
-                  height: 50,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
-                <Icon
-                  name="md-chevron-forward-circle"
-                  color={myGrey}
-                  size={30}
-                />
-              </View>
-            )}
-          </HStack>
+          <Input
+            variant="underlined"
+            size={15}
+            width={150}
+            color={primaryColor}
+            textAlign="center"
+            keyboardType="number-pad"
+          />
         </>
       )}
     </View>
   );
 }
+
+// <HStack justifyContent="center" alignItems="center">
+//               <Pressable
+//                 onPress={() =>
+//                   context._onChange({
+//                     field: 'loanAmount-minus',
+//                     value: loanAmount,
+//                   })
+//                 }
+//                 style={{
+//                   padding: 5,
+//                   margin: 3,
+//                   width: 50,
+//                   height: 50,
+//                   alignItems: 'center',
+//                   justifyContent: 'center',
+//                 }}>
+//                 <Icon name="chevron-back-circle" color={secondaryColor} size={30} />
+//               </Pressable>
+//             <View
+//               style={{
+//                 alignItems: 'center',
+//                 justifyContent: 'center',
+//                 width: '40%',
+//                 height: 50,
+//               }}>
+//               <Text fontSize={25} fontWeight="bold">
+//                 {loanAmount}
+//               </Text>
+//             </View>
+//               <Pressable
+//                 onPress={() =>
+//                   context._onChange({
+//                     field: 'loanAmount-plus',
+//                     value: loanAmount,
+//                   })
+//                 }
+//                 style={{
+//                   padding: 5,
+//                   margin: 3,
+//                   width: 50,
+//                   height: 50,
+//                   alignItems: 'center',
+//                   justifyContent: 'center',
+//                 }}>
+//                 <Icon
+//                   name="chevron-forward-circle"
+//                   color={secondaryColor}
+//                   size={30}
+//                 />
+//               </Pressable>
+//           </HStack>

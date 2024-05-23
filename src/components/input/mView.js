@@ -1,6 +1,5 @@
 import React, {useContext} from 'react';
 import {View, Text, VStack} from 'native-base';
-import Contexts from '../../libs/contexts';
 import Loader from '../loader';
 
 export default function MView(props) {
@@ -9,9 +8,9 @@ export default function MView(props) {
       <VStack>
         <Text pl={3}>{props.lable}</Text>
         <View
-          borderRadius={3}
-          borderWidth={0.3}
-          borderColor="grey.100"
+          // borderRadius={3}
+          borderBottomWidth={0.3}
+          borderBottomColor="grey.100"
           justifyContent="center"
           paddingLeft={3}
           h={10}>
