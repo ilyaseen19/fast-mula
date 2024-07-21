@@ -3,6 +3,7 @@ import { config } from "./config/index.js";
 import bodyParser from "body-parser";
 import cors from "cors"
 import helmet from "helmet";
+import { infoLogger } from "./utils/lgger.js";
 
 const app = Express();
 const PORT = config.PORT;
@@ -15,5 +16,5 @@ app.use(cors(corseOptions))
 app.use(helmet())
 
 app.listen(PORT, () => {
-  console.log(`Sever is running on port ${PORT}`);
+  infoLogger(`Sever is running on port ${PORT}`)
 });
