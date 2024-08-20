@@ -10,10 +10,10 @@ const create = Joi.object({
     phone: Joi.number().required(),
 });
 
-const login  = Joi.object({
+const login = Joi.object({
     userName: Joi.string().required(),
-    password: Joi.string().required()
-})
+    password: Joi.string().required(),
+});
 
 const updateAdmin = Joi.object({
     userName: Joi.string().required().max(15),
@@ -22,11 +22,16 @@ const updateAdmin = Joi.object({
     phone: Joi.number().required(),
     role: Joi.string().required(),
     department: Joi.string().required(),
-})
+});
 
 const updatePassword = Joi.object({
     oldPassword: Joi.string().required().min(6),
     newPassword: Joi.string().required().min(6),
-})
+});
 
-export default { create, login, updateAdmin, updatePassword };
+const processLoan = Joi.object({
+    processType: Joi.string().required(),
+    reviewComment: Joi.string().required(),
+});
+
+export default { create, login, updateAdmin, updatePassword, processLoan };

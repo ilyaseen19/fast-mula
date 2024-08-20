@@ -1,6 +1,7 @@
-import { Document } from "mongoose"
+import { Document, Types } from "mongoose"
 
 export interface AdminInterface extends Document {
+    _id: Types.ObjectId;
     userName: string;
     fullName: string;
     password: string;

@@ -1,10 +1,11 @@
-import { Document } from "mongoose";
+import { Document, Types } from "mongoose";
 
 export interface ILoan extends Document {
+    _id: Types.ObjectId;
     customerId: string;
     terms: boolean;
     amount: number;
-    duration: string;
+    duration: number;
     dateToBePaid: Date;
     dateOfApplication: Date;
     dateOfDisbursment: Date;
@@ -24,4 +25,21 @@ export interface ILoan extends Document {
     amountPaid: number;
     loanType: string; // cash / agri / farm animals
     nameAttached: string
+};
+
+export interface ILoanRequest {
+    _id: Types.ObjectId;
+    customerId: string;
+    terms: boolean;
+    amount: number;
+    duration: number
+    dateOfApplication: Date;
+    interest: number;
+    amountToPay: number;
+    useOfLoan: string;
+    paymentMethod: number;
+    whereHeard: string;
+    facialRecog: string;
+    loanType: string; // cash / agri / farm animals
+    nameAttached: string;
 }

@@ -7,6 +7,8 @@ import Loans from "@/resources/loans/loan.model"
 import { ILoansData } from '@/utils/interfaces/dto.interface';
 import AdminHandlers from '@/utils/handlers/admin.handlers';
 import Customer from '@/resources/customers/customer.model';
+import { ILoan } from '../loans/loan.interface';
+import { Res } from '@/utils/interfaces/res.interface';
 
 class AdminServices {
     private admin = adminModel;
@@ -93,7 +95,7 @@ class AdminServices {
 
             return admin
         } catch (error) {
-            throw new Error("Something went wrong")
+            throw new Error(error.message)
         }
     }
 
@@ -108,7 +110,7 @@ class AdminServices {
 
             return admins
         } catch (error) {
-            throw new Error("Something went wrong please try again")
+            throw new Error(error.message)
         }
     }
 
@@ -143,7 +145,7 @@ class AdminServices {
 
             return true
         } catch (error) {
-            throw new Error("Something went wrong")
+            throw new Error(error.message)
         }
     }
 
@@ -168,7 +170,7 @@ class AdminServices {
 
             return true
         } catch (error) {
-            throw new Error("Something went wrong, please try again")
+            throw new Error(error.message)
         }
     }
 
@@ -183,22 +185,25 @@ class AdminServices {
 
             return true
         } catch (error) {
-            throw new Error("Something went wrong, please try again")
+            throw new Error(error.message)
         }
     }
 
     /**
      * Attempt fetch data bassed on the logged in admin
      */
-    public fetchDataByAdminId = async (userId: number): Promise<{} | Error> => {
+    public fetchDataByAdminId = async (_id: string): Promise<{} | Error> => {
         try {
             let admins = await this.admin.find();
             
             let loansData = await this.loans.find();
 
             let customersData = await this.customers.find()
+            
 
-            let admin = admins.find(admin => admin.userId === userId)
+            let admin = admins.find(admin => admin._id.toString() === _id)
+
+            if(!admin) throw new Error("You are not authorised to view this data")
 
             let role = admin?.role
 
@@ -245,7 +250,7 @@ class AdminServices {
                 let unCompletedCases = collectionCases.filter(async loan => {
                     
                     if(loan.loanStatus === "Granted") {
-                        let loanCase = await this.adminHandlers.unCompletedCase(loan)
+                        let loanCase = await this.adminHandlers.signleCaseHandler(loan)
 
                         return loanCase
                     }
@@ -309,7 +314,48 @@ class AdminServices {
             return { foundLoans, foundAdmins, customersData }
 
         } catch (error) {
-            throw new Error("Something went wrong, please try again")
+            throw new Error(error.message)
+        }
+    }
+
+    /**
+     * Attemtp get a single loan
+     */
+    public fetchLoan = async (loanId: string): Promise<ILoan | Error> => {
+        try {
+
+            let loan = await this.loans.findById({ _id: loanId });
+
+            if(!loan) throw new Error("Could not fid data, please try again");
+
+            let updatedLoan = await this.adminHandlers.signleCaseHandler(loan);
+
+            return updatedLoan
+        } catch (error) {
+            throw new Error(error.message)
+        }
+    };
+
+    /**
+     * Attempt process loan grant or reject
+     */
+    public processLoan = async (loanId: string, processType: string, reviewComment: string): Promise<Res | Error> => {
+        try {
+            const loan = await this.loans.findById({ _id: loanId});
+
+            if(!loan) throw new Error("Could not complete request, please try again");
+
+            let results = await this.adminHandlers.processCaseHandler(loan, processType, reviewComment);
+
+            if(!results.success) throw new Error(results.message);
+
+            return results = {
+                success: true,
+                message: "Request completed sucessfully"
+            } 
+
+        } catch (error) {
+            throw new Error(error.message)
         }
     }
 }

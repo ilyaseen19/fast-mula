@@ -29,8 +29,10 @@ class AdminController implements Controller {
         this.router.get(`${this.path}/get-all-admins`, authenticated, this.getAllAdmins)
         this.router.patch(`${this.path}/update-admin-data/:userId`, authenticated, validationMiddleware(validate.updateAdmin),  this.updateAdminData)
         this.router.delete(`${this.path}/delete-admin`, authenticated, this.removeAdmin)
-        this.router.get(`${this.path}/get-data-by-admin-Id/:userId`, authenticated, this.getDataByAdminId);
-        this.router.patch(`${this.path}/update-admin-password/:userId`, authenticated, validationMiddleware(validate.updatePassword), this.updatePassword)
+        this.router.get(`${this.path}/get-data-by-admin-Id/:_id`, authenticated, this.getDataByAdminId);
+        this.router.patch(`${this.path}/update-admin-password/:userId`, authenticated, validationMiddleware(validate.updatePassword), this.updatePassword);
+        this.router.get(`${this.path}/get-loan/:loanId`, authenticated, this.getLoan);
+        this.router.patch(`${this.path}/process-loan/:_id`, authenticated, validationMiddleware(validate.processLoan), this.processLoan)
     }
 
     private create = async (req: Request, res: Response, next: NextFunction): Promise<Response | void> => {
@@ -119,11 +121,11 @@ class AdminController implements Controller {
         }
     }
 
-    private getDataByAdminId = async (req: Request<{userId: string}, {}, {}>, res:Response, next: NextFunction): Promise<Response | void> => {
+    private getDataByAdminId = async (req: Request<{_id: string}, {}, {}>, res:Response, next: NextFunction): Promise<Response | void> => {
         try {
-            const userId = parseInt(req.params.userId)
+            const _id = req.params._id
 
-            const results = await this.AdminServices.fetchDataByAdminId(userId)
+            const results = await this.AdminServices.fetchDataByAdminId(_id)
 
             if(!results) next(new HttpException(400, "Could not retreieve data, please try again"))
 
@@ -146,6 +148,36 @@ class AdminController implements Controller {
        } catch (error) {
             next(new HttpException(500, error.message))
        }
+    }
+
+    private getLoan = async (req: Request<{loanId: string}, {}, {}>, res: Response, next: NextFunction): Promise<Response | void> => {
+        try {
+            const { loanId } = req.params;
+
+            const loan = await this.AdminServices.fetchLoan(loanId);
+
+            if(!loan) next(new HttpException(400, "Could not complete request, please try again"));
+
+            return res.status(200).json(new ApiResponse(200, "Data retrieved successfully", loan))
+        } catch (error) {
+            next(new HttpException(500, error.message))
+        }
+    }
+
+    private processLoan = async (req: Request<{_id: string}, {}, {processType: string, reviewComment: string}>, res: Response, next: NextFunction): Promise<Response | void> => {
+        try {
+            const { processType, reviewComment } = req.body;
+
+            let loanId = req.params._id
+
+            const response = await this.AdminServices.processLoan(loanId, processType, reviewComment)
+
+            if(response instanceof Error) next(new HttpException(400, "Could not process request"));
+
+            return res.status(200).json(new ApiResponse(200, response.message, {}));
+        } catch (error) {
+            next(new HttpException(500, error.message))
+        }
     }
 }
 
